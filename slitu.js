@@ -207,4 +207,30 @@
 	slitu.isNumber = function ( obj ) {
 		return {}.toString.call(obj) === "[object Number]";
 	};
+
+	slitu.isNaN = function (obj) {
+		return typeof obj === "number" && obj !== obj;
+	};
+
+	slitu.isNull = function (obj) {
+		return {}.toString.call(obj) === "[object Null]";
+	};
+
+	slitu.isArray = function (obj) {
+		return {}.toString.call(obj) === "[object Array]";
+	};
+
+	slitu.isBool = function (obj) {
+		return {}.toString.call(obj) === "[object Boolean]";
+	};
+
+	slitu.isDate = function (obj) {
+		return {}.toString.call(obj) === "[object Date]" || obj instanceof Date;
+	};
+
+	slitu.isFalsy = function (obj) {
+		return (slitu.isUndefined(obj) || slitu.isNull(obj) || slitu.isNaN(obj) ||
+			obj === "" || obj === 0 || (slitu.isBool(obj) && Boolean(obj) === false));
+	};
+	
 })(window.slitu = window.slitu || {});
