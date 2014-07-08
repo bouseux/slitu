@@ -5,9 +5,6 @@
 
 ;(function ( slitu, undefined ) {
 
-	// Library setup
-	// -------------
-
 	// Current version
 	slitu.VERSION = '';
 
@@ -19,9 +16,6 @@
 		return !isNaN(y) && x == y && x.toString() == y.toString();
 	}
 
-	// Exceptions
-	// ----------
-
 	function SlituException ( message, type ) {
 		this.message = message;
 		this.type = type;
@@ -30,10 +24,13 @@
 	// Public API
 	// ----------
 
+	// Array methods
+	// -------------
+
 	slitu.at = function ( arr, index ) {
-		if ( !(index instanceof Array) && isInt(index) ) {
+		if ( !slitu.isArray(index) && isInt(index) ) {
 			return arr[index];
-		} else if ( index instanceof Array ) {
+		} else if ( slitu.isArray(index) ) {
 			var matched = [],
 				i,
 				len = index.length;
@@ -126,18 +123,6 @@
 
 	};
 
-	slitu.isHomogeneous = function ( arr, type ) {
-		if ( arr.length === 0 ) throw new SlituException('', 'EmptyArrayException');
-
-		var len = arr.length, i;
-
-		for ( i = 0; i < len; i += 1 )
-			if ( typeof arr[i] !== type )
-				return false;
-
-		return true;
-	};
-
 	slitu.intersection = function ( arr1, arr2 ) {
 
 	};
@@ -169,6 +154,10 @@
 
 	};
 
+	slitu.sum = function ( arr ) {
+
+	};
+
 	slitu.union = function () {
 		return slitu.unique(Array.prototype.concat.apply(Array.prototype, arguments));
 	};
@@ -181,11 +170,37 @@
 		arr.filter(function (v) { if (!slitu.contains(values, v)) return true; })
 	};
 
+	// Function methods
+	// ----------------
+	slitu.after = function ( fn, n ) {
+		fn.n = fn.after = n;
+		return function () {
+			if ( fn.n > 1 ) {
+
+			} else {
+				fn.apply( this, arguments );
+				fn.n = fn.after;
+			}
+		};
+	};
+	
 	// Miscellaneous
 	// -------------
 
 	slitu.isString = function ( obj ) {
 		return typeof obj === "string" && {}.toString.call(obj) === "[object String]";
+	};
+
+	slitu.isHomogeneous = function ( arr, type ) {
+		if ( arr.length === 0 ) throw new SlituException('', 'EmptyArrayException');
+
+		var len = arr.length, i;
+
+		for ( i = 0; i < len; i += 1 )
+			if ( typeof arr[i] !== type )
+				return false;
+
+		return true;
 	};
 
 	slitu.isEmpty = function ( arr ) {
@@ -232,5 +247,5 @@
 		return (slitu.isUndefined(obj) || slitu.isNull(obj) || slitu.isNaN(obj) ||
 			obj === "" || obj === 0 || (slitu.isBool(obj) && Boolean(obj) === false));
 	};
-	
+
 })(window.slitu = window.slitu || {});
