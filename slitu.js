@@ -166,7 +166,7 @@
 	};
 
 	slitu.sortBy = function ( arr, fn ) {
-		
+
 	};
 
 	slitu.union = function () {
@@ -185,10 +185,26 @@
 	// -------------
 
 	slitu.isString = function ( obj ) {
-    	return typeof obj === "string" && {}.toString.call(obj) === "[object String]";
-  	};
+		return typeof obj === "string" && {}.toString.call(obj) === "[object String]";
+	};
 
-  	slitu.isEmpty = function ( arr ) {
-  		return (arr instanceof Array && arr.length === 0 );
-  	};
+	slitu.isEmpty = function ( arr ) {
+		return (arr instanceof Array && arr.length === 0 );
+	};
+
+	slitu.isFunction = function ( obj ) {
+		return {}.toString.call(obj) === "[object Function]";
+	};
+
+	slitu.isObject = function ( obj ) {
+		return typeof obj === "object";
+	};
+
+	slitu.isUndefined = function ( obj ) {
+		return typeof obj === "undefined";
+	};
+
+	slitu.isNumber = function ( obj ) {
+		return {}.toString.call(obj) === "[object Number]";
+	};
 })(window.slitu = window.slitu || {});
