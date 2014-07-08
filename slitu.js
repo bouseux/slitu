@@ -170,6 +170,10 @@
 		arr.filter(function (v) { if (!slitu.contains(values, v)) return true; })
 	};
 
+	slitu.zeros = function ( n ) {
+
+	};
+
 	// Function methods
 	// ----------------
 	slitu.after = function ( fn, n ) {
@@ -183,7 +187,35 @@
 			}
 		};
 	};
-	
+
+	slitu.delay = function ( fn, ms ) {
+		return function () {
+			var args = arguments;
+			setTimeout(function () {
+				return fn.apply(null, args);
+			}, ms);
+		}
+	};
+
+	slitu.once = function ( fn ) {
+		fn.n = fn.once = 1;
+		return function () {
+			if ( fn.n ) {
+				fn.n--;
+				return fn.apply(this, arguments);
+			}
+		};
+	};
+
+	slitu.times = function ( fn, n ) {
+		fn.n = n;
+		return function () {
+			for ( var i = 0; i < fn.n; i+= 1 ) {
+				fn.apply(this, arguments);
+			}
+		};
+	};
+
 	// Miscellaneous
 	// -------------
 
