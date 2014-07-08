@@ -1,12 +1,15 @@
-//
-//
-//
-//
+//	Slitu.js [version]
+//	[website]
+//	Authors: Edbali Ossama
+//	Slitu is licensed under MIT license
 
 ;(function ( slitu, undefined ) {
 
-	// Current version
-	slitu.VERSION = '';
+	// Library info
+	// ------------
+
+	slitu.VERSION = 'version';
+	slitu.AUTHORS = ['Edbali Ossama'];
 
 	// Private methods
 	// ---------------
@@ -21,15 +24,15 @@
 		this.type = type;
 	}
 
-	// Public API
-	// ----------
-
 	// Array methods
 	// -------------
 
 	slitu.at = function ( arr, index ) {
 		if ( !slitu.isArray(index) && isInt(index) ) {
-			return arr[index];
+			if ( index >= arr.length )
+				throw new SlituException('', '')
+			else
+				return arr[index];
 		} else if ( slitu.isArray(index) ) {
 			var matched = [],
 				i,
@@ -38,15 +41,14 @@
 			for ( i = 0; i < len; i += 1 ) {
 				matched.push(arr[index[i]]);
 			}
-		} else {
+
+			return matched;
+		} else
 			throw new SlituException('Parameter "index" is not an array or integer', 'TypeException');
-		}
 	};
 
 	slitu.average = function ( arr ) {
-		if ( slitu.isHomogeneous(arr, 'number') ) {
-
-		}
+		return slitu.sum(arr) / arr.length;
 	};
 
 	slitu.contains = function ( arr, value ) {
@@ -155,7 +157,18 @@
 	};
 
 	slitu.sum = function ( arr ) {
+		if ( slitu.isHomogeneous(arr, 'number') ) {
+			var sum = 0,
+				len = arr.length,
+				i;
 
+			for ( i = 0; i < len; i += 1 ) {
+				sum += arr[i];
+			}
+
+			return sum;
+		} else
+			throw new SlituException('"arr" is not a homogeneous array', 'TypeException');
 	};
 
 	slitu.union = function () {
@@ -176,6 +189,7 @@
 
 	// Function methods
 	// ----------------
+
 	slitu.after = function ( fn, n ) {
 		fn.n = fn.after = n;
 		return function () {
@@ -216,8 +230,8 @@
 		};
 	};
 
-	// Numbers methods
-	// ---------------
+	// Number methods
+	// --------------
 
 	slitu.range = function ( start, stop, step ) {
 		var step = step || 1,
@@ -330,7 +344,12 @@
 		for ( var key in obj )
 			str += (key + '=' + obj[key] + '&');
 
-		
+		return str.slice(0, -1);
 	};
+
+	// String methods
+	// --------------
+
+
 
 })(window.slitu = window.slitu || {});
