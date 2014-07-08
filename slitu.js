@@ -276,29 +276,61 @@
 		return {}.toString.call(obj) === "[object Number]";
 	};
 
-	slitu.isNaN = function (obj) {
+	slitu.isNaN = function ( obj ) {
 		return typeof obj === "number" && obj !== obj;
 	};
 
-	slitu.isNull = function (obj) {
+	slitu.isNull = function ( obj ) {
 		return {}.toString.call(obj) === "[object Null]";
 	};
 
-	slitu.isArray = function (obj) {
+	slitu.isArray = function ( obj ) {
 		return {}.toString.call(obj) === "[object Array]";
 	};
 
-	slitu.isBool = function (obj) {
+	slitu.isBool = function ( obj ) {
 		return {}.toString.call(obj) === "[object Boolean]";
 	};
 
-	slitu.isDate = function (obj) {
+	slitu.isDate = function ( obj ) {
 		return {}.toString.call(obj) === "[object Date]" || obj instanceof Date;
 	};
 
-	slitu.isFalsy = function (obj) {
+	slitu.isFalsy = function ( obj ) {
 		return (slitu.isUndefined(obj) || slitu.isNull(obj) || slitu.isNaN(obj) ||
 			obj === "" || obj === 0 || (slitu.isBool(obj) && Boolean(obj) === false));
+	};
+
+
+	//_.module('Earth.places.ocean')
+	// => {Earth: {places: {ocean: {}}}}
+	slitu.namespace = function ( ns_string, obj ) {
+		var parts = ns_string.split('.'),
+			parent = obj,
+			i;
+
+		// Strip redundant leading global
+		if ( parts[0] === "MYAPP" ) { // change MYAPP
+			parts = parts.slice(1);
+		}
+
+		for (i = 0; i < parts.length; i += 1) {
+			if (typeof parent[parts[i]] === "undefined") {
+				parent[parts[i]] = {};
+			}
+			parent = parent[parts[i]];
+		}
+
+		return parent;
+	};
+
+	slitu.toQueryString = function ( obj ) {
+		var str = '';
+
+		for ( var key in obj )
+			str += (key + '=' + obj[key] + '&');
+
+		
 	};
 
 })(window.slitu = window.slitu || {});
