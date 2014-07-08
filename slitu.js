@@ -129,6 +129,18 @@
 
 	};
 
+	slitu.iterator = function ( arr ) {
+		var nextIndex = 0;
+
+		return {
+			next: function () {
+				return nextIndex < array.length ?
+				{value: array[nextIndex++], done: false} :
+				{done: true};
+			}
+		}
+	};
+
 	slitu.last = function ( arr, count ) {
 		return count ? Array.prototype.slice.call(arr, arr.length-count, arr.length) : arr[arr.length-1];
 	};
