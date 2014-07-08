@@ -237,8 +237,8 @@
 		return arr;
 	};
 
-	// Miscellaneous methods
-	// ---------------------
+	// Object methods
+	// --------------
 
 	slitu.isString = function ( obj ) {
 		return typeof obj === "string" && {}.toString.call(obj) === "[object String]";
