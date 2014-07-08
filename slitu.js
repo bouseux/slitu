@@ -210,14 +210,35 @@
 	slitu.times = function ( fn, n ) {
 		fn.n = n;
 		return function () {
-			for ( var i = 0; i < fn.n; i+= 1 ) {
+			for ( var i = 0; i < fn.n; i += 1 ) {
 				fn.apply(this, arguments);
 			}
 		};
 	};
 
-	// Miscellaneous
-	// -------------
+	// Numbers methods
+	// ---------------
+
+	slitu.range = function ( start, stop, step ) {
+		var step = step || 1,
+			arr = [],
+			stop = stop || start;
+			start = (arguments.length === 1) ? 0 : start;
+			i;
+
+		if ( !(isInt(start) && isInt(stop)) ) {
+			throw SlituException('start and stop parameters must be integers', 'TypeException');
+		}
+
+		for ( i = start; i < stop; i += step ) {
+			arr.push(i);
+		}
+
+		return arr;
+	};
+
+	// Miscellaneous methods
+	// ---------------------
 
 	slitu.isString = function ( obj ) {
 		return typeof obj === "string" && {}.toString.call(obj) === "[object String]";
