@@ -55,7 +55,7 @@
 		var len = arr.length, i;
 
 		for ( i = 0; i < len; i += 1 )
-			if ( arr[i] === value )
+			if ( arr[i] === value ) // isEqual!!!!
 				return true;
 
 		return false;
@@ -67,7 +67,7 @@
 			i;
 
 		for ( i = 0; i < len; i += 1 )
-			if ( arr[i] === value )
+			if ( arr[i] === value ) // isEqual!!!!
 				count++;
 
 		return count;
@@ -82,45 +82,43 @@
 
 		for ( i = 0; i < len; i += 1 )
 			arr[i] = undefined;
-
-		return arr;
 	};
 
 	slitu.first = function ( arr, count ) {
-		var len = arr.length;
-
-		if ( !(index instanceof Array) )
-			throw new SlituException('');
+		if ( !slitu.isArray(arr) )
+			throw new SlituException('', '');
 
 		if ( typeof count === 'undefined' )
 			return arr[0];
 		else {
+			var len = arr.length;
+
 			if ( count > len )
-				throw new SlituException('');
+				throw new SlituException('', '');
 			else {
 				var matched = [], i;
 
 				for ( i = 0; i < count; i += 1 )
 					matched.push(arr[i]);
+
+				return matched;
 			}
 		}
 	};
 
 	slitu.getByType = function ( arr, type ) {
-
-	};
-
-	slitu.initial = function ( arr, count ) {
-		var m = count ? arr.length - count : arr.length - 1,
-			matched = [],
+		var matched = [],
+			len = arr.length,
 			i;
 
-		for ( i = 0; i < m; i += 1 )
-			matched.push(arr[i]);
+		for ( i = 0; i < len; i += 1 ) {
+			if ( typeof arr === type )
+				matched.push(arr[i])
+		}
 
 		return matched;
 	};
-
+	
 	slitu.infiniteIterator = function () {
 		var index = 0;
 
