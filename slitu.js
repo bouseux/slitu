@@ -121,6 +121,16 @@
 		return matched;
 	};
 
+	slitu.infiniteIterator = function () {
+		var index = 0;
+
+		return {
+			next: function () {
+				return index++;
+			}
+		}
+	};
+
 	slitu.insert = function ( arr, value, index ) {
 
 	};
@@ -134,8 +144,8 @@
 
 		return {
 			next: function () {
-				return nextIndex < array.length ?
-				{value: array[nextIndex++], done: false} :
+				return nextIndex < arr.length ?
+				{value: arr[nextIndex++], done: false} :
 				{done: true};
 			}
 		}
@@ -271,9 +281,11 @@
 	};
 
 	slitu.isHomogeneous = function ( arr, type ) {
-		if ( arr.length === 0 ) throw new SlituException('', 'EmptyArrayException');
+		if ( !slitu.isArray(arr) )
+			throw new SlituException('', 'TypeException');
 
 		var len = arr.length, i;
+		type = type || typeof arr[0]
 
 		for ( i = 0; i < len; i += 1 )
 			if ( typeof arr[i] !== type )
