@@ -118,7 +118,7 @@
 
 		return matched;
 	};
-	
+
 	slitu.infiniteIterator = function () {
 		var index = 0;
 
@@ -126,7 +126,7 @@
 			next: function () {
 				return index++;
 			}
-		}
+		};
 	};
 
 	slitu.insert = function ( arr, value, index ) {
@@ -146,7 +146,7 @@
 				{value: arr[nextIndex++], done: false} :
 				{done: true};
 			}
-		}
+		};
 	};
 
 	slitu.last = function ( arr, count ) {
@@ -154,11 +154,39 @@
 	};
 
 	slitu.max = function ( arr ) {
+		if ( !slitu.isArray(arr) )
+			throw new SlituException('', '');
 
+		if ( !slitu.isHomogeneous(arr, 'number') )
+			throw new SlituException('', 'TypeException');
+
+		var _max = arr[0];
+
+		for ( i = 1; i < arr.length; i += 1 ) {
+			if ( arr[i] > _max ) {
+				_max = arr[i];
+			}
+		}
+
+		return _max;
 	};
 
 	slitu.min = function ( arr ) {
+		if ( !slitu.isArray(arr) )
+			throw new SlituException('', '');
 
+		if ( !slitu.isHomogeneous(arr, 'number') )
+			throw new SlituException('', 'TypeException');
+
+		var _min = arr[0];
+
+		for ( i = 1; i < arr.length; i += 1 ) {
+			if ( arr[i] < _min ) {
+				_min = arr[i];
+			}
+		}
+
+		return _min;
 	};
 
 	slitu.remove = function ( arr, value ) {
@@ -273,6 +301,10 @@
 
 	// Object methods
 	// --------------
+
+	slitu.isEqual = function ( obj1, obj2 ) {
+
+	};
 
 	slitu.isString = function ( obj ) {
 		return typeof obj === "string" && {}.toString.call(obj) === "[object String]";
