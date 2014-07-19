@@ -138,7 +138,13 @@
 	};
 
 	slitu.insert = function ( arr, value, index ) {
+		if ( !slitu.isArray(arr) )
+			throw new SlituException('"arr" is not an array.', 'TypeException');
 
+		if ( !isInt(index) )
+			throw new SlituException('"index" must be an integer.', 'TypeException');
+
+		arr.splice(index, 0, value);
 	};
 
 	slitu.intersection = function ( arr1, arr2 ) {
