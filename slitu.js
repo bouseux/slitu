@@ -424,6 +424,60 @@
 	// String methods
 	// --------------
 
+	// Reference: http://es5.github.com/#x15.4.4.19
+	if ( !Array.prototype.map ) {
+
+		Array.prototype.map = function (callback, thisArg) {
+			var T, A, k;
+
+			if (this == null) {
+				throw new TypeError(" this is null or not defined");
+			}
+
+			var O = Object(this),
+				len = O.length >>> 0;
+
+			if (typeof callback !== "function") {
+				throw new TypeError(callback + " is not a function");
+			}
+
+			if (arguments.length > 1) {
+				T = thisArg;
+			}
+
+			A = new Array(len);
+			k = 0;
+
+			while (k < len) {
+				var kValue, mappedValue;
+
+				if (k in O) {
+					kValue = O[k];
+					mappedValue = callback.call(T, kValue, k, O);
+					A[k] = mappedValue;
+				}
+
+				k++;
+			}
+
+			return A;
+		};
+	}
+
+	slitu.blankToUnderscore = function ( str ) {
+		return str.trim().split(' ').join('_');
+	};
+
+	slitu.camelCased = function ( str ) {
+		var arr = slitu.trimWithin(str.trim()).split(' ');
+
+		return arr.map(function ( s, index ) {
+			if ( index !== 0 )
+				return slitu.capitalize(s);
+			else return s;
+		}).join('');
+	};
+
 	slitu.capitalize = function ( str ) {
 		if ( !slitu.isString(str) )
 			throw new SlituException('', 'TypeException');
@@ -431,10 +485,8 @@
 		return str[0].toUpperCase() + str.slice(1);
 	};
 
-	slitu.endsWith = function ( str, match ) {
-		var len = match.length;
-
-
+	slitu.endsWith = function ( str, suffix ) {
+		return str.indexOf(suffix, str.length - suffix.length) !== -1;
 	};
 
 	slitu.repeat = function ( str, num ) {
@@ -462,12 +514,14 @@
 		return str.split('\n');
 	};
 
-	slitu.startsWith = function ( str, match ) {
-
+	slitu.swapCase = function ( str ) {
+		return str.replace(/([a-z])|([A-Z])/g, function( $0, $1, $2) {
+			return ($1) ? $0.toUpperCase() : $0.toLowerCase()
+		});
 	};
 
-	slitu.swapCase = function ( str ) {
-
+	slitu.trimWithin = function ( str ) {
+		return str.replace(/\s+/g, " ");
 	};
 
 	slitu.zFill = function ( str, width ) {
