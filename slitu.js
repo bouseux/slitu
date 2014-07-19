@@ -28,11 +28,10 @@
 	// -------------
 
 	slitu.append = function ( arr, item ) {
-		if ( !slitu.isArray(arr) ) {
+		if ( !slitu.isArray(arr) )
 			throw new SlituException('"arr" parameter is not an array.', 'TypeException')
-		} else {
+		else
 			arr[arr.length] = item;
-		}
 	};
 
 	slitu.at = function ( arr, index ) {
@@ -63,7 +62,7 @@
 		var len = arr.length, i;
 
 		for ( i = 0; i < len; i += 1 )
-			if ( arr[i] === value ) // isEqual!!!!
+			if ( arr[i] === value ) // TODO: isEqual!!!!
 				return true;
 
 		return false;
@@ -75,7 +74,7 @@
 			i;
 
 		for ( i = 0; i < len; i += 1 )
-			if ( arr[i] === value ) // isEqual!!!!
+			if ( arr[i] === value ) // TODO: isEqual!!!!
 				count++;
 
 		return count;
@@ -251,7 +250,12 @@
 	};
 
 	slitu.zeros = function ( n ) {
+		var i, arr = [];
 
+		for ( i = 0; i < n; i += 1 )
+			arr[i] = 0;
+
+		return arr;
 	};
 
 	// Function methods
@@ -388,9 +392,6 @@
 			obj === "" || obj === 0 || (slitu.isBool(obj) && Boolean(obj) === false));
 	};
 
-
-	//_.module('Earth.places.ocean')
-	// => {Earth: {places: {ocean: {}}}}
 	slitu.namespace = function ( ns_string, obj ) {
 		var parts = ns_string.split('.'),
 			parent = obj,
@@ -423,6 +424,16 @@
 	// String methods
 	// --------------
 
+	slitu.reverse = function ( str ) {
+		if ( !slitu.isString(str) )
+			throw new SlituException('', 'TypeException');
 
+		var i, len = str.length, out = '';
+
+		for ( i = len - 1; i >= 0; i -= 1 )
+			out += str[i];
+
+		return out;
+	};
 
 })(window.slitu = window.slitu || {});
