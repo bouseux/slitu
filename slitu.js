@@ -9,6 +9,7 @@
 	// ------------
 
 	slitu.VERSION = 'version';
+	slitu.REPO = 'https://github.com/oss6/slitu';
 	slitu.AUTHORS = ['Edbali Ossama'];
 
 	// Private methods
@@ -396,11 +397,6 @@
 		var parts = ns_string.split('.'),
 			parent = obj,
 			i;
-
-		// Strip redundant leading global
-		if ( parts[0] === "MYAPP" ) { // change MYAPP
-			parts = parts.slice(1);
-		}
 
 		for (i = 0; i < parts.length; i += 1) {
 			if (typeof parent[parts[i]] === "undefined") {
