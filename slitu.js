@@ -424,6 +424,19 @@
 	// String methods
 	// --------------
 
+	slitu.capitalize = function ( str ) {
+		if ( !slitu.isString(str) )
+			throw new SlituException('', 'TypeException');
+
+		return str[0].toUpperCase() + str.slice(1);
+	};
+
+	slitu.endsWith = function ( str, match ) {
+		var len = match.length;
+
+
+	};
+
 	slitu.reverse = function ( str ) {
 		if ( !slitu.isString(str) )
 			throw new SlituException('', 'TypeException');
@@ -434,6 +447,21 @@
 			out += str[i];
 
 		return out;
+	};
+
+	slitu.splitLines = function ( str ) {
+		if ( !slitu.isString(str) )
+			throw new SlituException('', 'TypeException');
+
+		return str.split('\n');
+	};
+
+	slitu.startsWith = function ( str, match ) {
+
+	};
+
+	slitu.swapCase = function ( str ) {
+
 	};
 
 })(window.slitu = window.slitu || {});
