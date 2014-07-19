@@ -437,6 +437,12 @@
 
 	};
 
+	slitu.repeat = function ( str, num ) {
+		for ( var e = ''; e.length < num; )
+			e += str;
+		return e;
+	};
+
 	slitu.reverse = function ( str ) {
 		if ( !slitu.isString(str) )
 			throw new SlituException('', 'TypeException');
@@ -462,6 +468,15 @@
 
 	slitu.swapCase = function ( str ) {
 
+	};
+
+	slitu.zFill = function ( str, width ) {
+		var len = str.length;
+
+		if ( width <= len )
+			return str;
+
+		return slitu.repeat('0', width - len).concat(str);
 	};
 
 })(window.slitu = window.slitu || {});
