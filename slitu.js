@@ -27,6 +27,14 @@
 	// Array methods
 	// -------------
 
+	slitu.append = function ( arr, item ) {
+		if ( !slitu.isArray(arr) ) {
+			throw new SlituException('"arr" parameter is not an array.', 'TypeException')
+		} else {
+			arr[arr.length] = item;
+		}
+	};
+
 	slitu.at = function ( arr, index ) {
 		if ( !slitu.isArray(index) && isInt(index) ) {
 			if ( index >= arr.length )
@@ -187,6 +195,11 @@
 		}
 
 		return _min;
+	};
+
+	slitu.prepend = function ( arr, item ) {
+		item = [item];
+		return item.concat(arr);
 	};
 
 	slitu.remove = function ( arr, value ) {
