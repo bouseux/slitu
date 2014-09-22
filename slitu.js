@@ -10,14 +10,13 @@
 
 	slitu.VERSION = 'version';
 	slitu.REPO = 'https://github.com/oss6/slitu';
-	slitu.DESCRIPTION = 'Slitu is a javascript utility library that includes functions 
-						to deal with arrays, functions, numbers, objects and strings.';
+	slitu.DESCRIPTION = 'Slitu is a javascript utility library that includes functions to deal with arrays, functions, numbers, objects and strings.';
 	slitu.AUTHORS = ['Edbali Ossama'];
 
 	// Private methods
 	// ---------------
 
-	function isInt ( x ) {
+	var isInt = function ( x ) {
 		var y = parseInt(x, 10);
 		return !isNaN(y) && x == y && x.toString() == y.toString();
 	}
@@ -211,14 +210,7 @@
 	};
 
 	slitu.remove = function ( arr, value ) {
-		/*//removes 1 element from index 3
-		removed = myFish.splice(3, 1);
-		//myFish is ["angel", "clown", "drum", "surgeon"]
-		//removed is ["mandarin"]
-
-		var index = arr.indexOf(value);
-		arr.splice(1)
-		return arr;*/
+		return arr.splice(arr.indexOf(value), 1); // TODO: isEqual
 	};
 
 	slitu.sortBy = function ( arr, fn ) {
