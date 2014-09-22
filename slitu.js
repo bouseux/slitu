@@ -461,7 +461,7 @@
 			return A;
 		};
 	}
-
+	
 	slitu.blankToUnderscore = function ( str ) {
 		return str.trim().split(' ').join('_');
 	};
@@ -518,8 +518,8 @@
 		});
 	};
 
-	slitu.trimWithin = function ( str ) {
-		return str.replace(/\s+/g, " ");
+	slitu.trim = function ( str ) {
+		return this.replace(/^\s+|\s+$/g, '');	
 	};
 
 	slitu.zFill = function ( str, width ) {
