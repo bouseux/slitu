@@ -1,5 +1,4 @@
-//	Slitu.js [version]
-//	[website]
+//	Slitu.js 0.0.1
 //	Authors: Edbali Ossama
 //	Slitu is licensed under MIT license
 
@@ -25,7 +24,10 @@
 		this.message = message;
 		this.type = type;
 	}
-
+	
+	// PUBLIC API
+	// ----------
+	
 	// Array methods
 	// -------------
 
@@ -453,7 +455,7 @@
 			return A;
 		};
 	}
-
+	
 	slitu.blankToUnderscore = function ( str ) {
 		return str.trim().split(' ').join('_');
 	};
@@ -510,8 +512,8 @@
 		});
 	};
 
-	slitu.trimWithin = function ( str ) {
-		return str.replace(/\s+/g, " ");
+	slitu.trim = function ( str ) {
+		return this.replace(/^\s+|\s+$/g, '');	
 	};
 
 	slitu.zFill = function ( str, width ) {
