@@ -7,7 +7,7 @@
 	// Library info
 	// ------------
 
-	slitu.VERSION = 'version';
+	slitu.VERSION = '0.0.1';
 	slitu.REPO = 'https://github.com/oss6/slitu';
 	slitu.DESCRIPTION = 'Slitu is a javascript utility library that includes functions to deal with arrays, functions, numbers, objects and strings.';
 	slitu.AUTHORS = ['Edbali Ossama'];
@@ -84,10 +84,6 @@
 		return count;
 	};
 
-	slitu.difference = function ( arr1, arr2 ) {
-
-	};
-
 	slitu.empty = function ( arr ) {
 		var len = arr.length, i;
 
@@ -115,6 +111,10 @@
 				return matched;
 			}
 		}
+	};
+
+	slitu.flatten = function ( arr ) {
+
 	};
 
 	slitu.getByType = function ( arr, type ) {
