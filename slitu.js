@@ -91,6 +91,16 @@
 			arr[i] = undefined;
 	};
 
+	slitu.fill = function ( count, elem ) {
+		var arr = [],
+			i;
+
+		for (i = 0; i < count; i += 1)
+			arr[i] = elem;
+
+		return arr;
+	};
+
 	slitu.first = function ( arr, count ) {
 		if ( !slitu.isArray(arr) )
 			throw new SlituException('', '');
