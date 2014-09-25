@@ -12,6 +12,46 @@
 	slitu.DESCRIPTION = 'Slitu is a javascript utility library that includes functions to deal with arrays, functions, numbers, objects and strings.';
 	slitu.AUTHORS = ['Edbali Ossama'];
 
+	// Reference: http://es5.github.com/#x15.4.4.19
+	if ( !Array.prototype.map ) {
+
+		Array.prototype.map = function (callback, thisArg) {
+			var T, A, k;
+
+			if (this == null) {
+				throw new TypeError(" this is null or not defined");
+			}
+
+			var O = Object(this),
+				len = O.length >>> 0;
+
+			if (typeof callback !== "function") {
+				throw new TypeError(callback + " is not a function");
+			}
+
+			if (arguments.length > 1) {
+				T = thisArg;
+			}
+
+			A = new Array(len);
+			k = 0;
+
+			while (k < len) {
+				var kValue, mappedValue;
+
+				if (k in O) {
+					kValue = O[k];
+					mappedValue = callback.call(T, kValue, k, O);
+					A[k] = mappedValue;
+				}
+
+				k++;
+			}
+
+			return A;
+		};
+	}
+
 	// Private methods
 	// ---------------
 
@@ -91,12 +131,12 @@
 			arr[i] = undefined;
 	};
 
-	slitu.fill = function ( count, elem ) {
+	slitu.fill = function ( dim, initial ) {
 		var arr = [],
 			i;
 
-		for (i = 0; i < count; i += 1)
-			arr[i] = elem;
+		for (i = 0; i < dim; i += 1)
+			arr[i] = initial;
 
 		return arr;
 	};
@@ -140,6 +180,16 @@
 		return matched;
 	};
 
+	slitu.identity = function ( n ) {
+		var i, mat = slitu.matrix(n, n, 0);
+
+		for ( i = 0; i < n; i += 1 ) {
+			mat[i][i] = 1;
+		}
+
+		return mat;
+	};
+
 	slitu.infiniteIterator = function () {
 		var index = 0;
 
@@ -178,6 +228,20 @@
 
 	slitu.last = function ( arr, count ) {
 		return count ? Array.prototype.slice.call(arr, arr.length-count, arr.length) : arr[arr.length-1];
+	};
+
+	slitu.matrix = function ( rows, cols, initial ) {
+		var i, j, arr, mat = [];
+
+		for ( i = 0; i < rows; i += 1 ) {
+			arr = [];
+			for ( j = 0; j < cols; j += 1 ) {
+				arr[j] = initial;
+			}
+			mat[i] = arr;
+		}
+
+		return mat;
 	};
 
 	slitu.max = function ( arr ) {
@@ -221,8 +285,18 @@
 		return item.concat(arr);
 	};
 
-	slitu.remove = function ( arr, value ) {
-		return arr.splice(arr.indexOf(value), 1); // TODO: isEqual
+	slitu.reduce = function ( arr, f, value ) {
+		var i;
+
+		for ( i = 0; i < arr.length; i += 1 ) {
+			value = f(arr[i], value);
+		}
+
+		return value;
+	};
+
+	slitu.removeAt = function ( arr, index ) {
+		return arr.splice(index, 1);
 	};
 
 	slitu.sortBy = function ( arr, fn ) {
@@ -333,7 +407,14 @@
 	// --------------
 
 	slitu.isEqual = function ( obj1, obj2 ) {
+		if ( isArray(obj1) && isArray(obj2) ) {
+			if ( obj1.length !== obj2.length )
+				return false;
+		} else if () {
+			
+		}
 
+		return true;
 	};
 
 	slitu.isString = function ( obj ) {
@@ -426,46 +507,6 @@
 	// String methods
 	// --------------
 
-	// Reference: http://es5.github.com/#x15.4.4.19
-	if ( !Array.prototype.map ) {
-
-		Array.prototype.map = function (callback, thisArg) {
-			var T, A, k;
-
-			if (this == null) {
-				throw new TypeError(" this is null or not defined");
-			}
-
-			var O = Object(this),
-				len = O.length >>> 0;
-
-			if (typeof callback !== "function") {
-				throw new TypeError(callback + " is not a function");
-			}
-
-			if (arguments.length > 1) {
-				T = thisArg;
-			}
-
-			A = new Array(len);
-			k = 0;
-
-			while (k < len) {
-				var kValue, mappedValue;
-
-				if (k in O) {
-					kValue = O[k];
-					mappedValue = callback.call(T, kValue, k, O);
-					A[k] = mappedValue;
-				}
-
-				k++;
-			}
-
-			return A;
-		};
-	}
-	
 	slitu.blankToUnderscore = function ( str ) {
 		return str.trim().split(' ').join('_');
 	};
