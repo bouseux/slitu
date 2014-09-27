@@ -55,10 +55,18 @@
 	// Private methods
 	// ---------------
 
-	var isInt = function ( x ) {
+	var 
+	isInt = function ( x ) {
 		var y = parseInt(x, 10);
 		return !isNaN(y) && x == y && x.toString() == y.toString();
-	}
+	},
+
+	swap = function (el1, el2) {
+		var tmp = el1;
+		el1 = el2;
+		el2 = tmp;
+	};
+
 
 	function SlituException ( message, type ) {
 		this.message = message;
@@ -299,8 +307,15 @@
 		return arr.splice(index, 1);
 	};
 
-	slitu.sortBy = function ( arr, fn ) {
-
+	slitu.sort = function ( arr ) {
+		for (var i = 0; i < arr.length - 1; i++ ) {
+			for ( var j = i + 1; j < arr.length; j++ )
+				if ( arr[i] > arr[j] ) {
+					var tmp = arr[i];
+					arr[i] = arr[j];
+					arr[j] = tmp;
+				}
+		}
 	};
 
 	slitu.sum = function ( arr ) {
