@@ -26,3 +26,10 @@ QUnit.test('average test', function (assert) {
 	var arr = [1, 2, 3, 4];
 	assert.equal(slitu.average(arr), 5);
 });
+
+QUnit.test('empty test', function (assert) {
+	var arr = [5, null, 'Hi there', {'name': 'John'}, [3, 1]];
+	
+	slitu.empty(arr);
+	assert.equal(arr, [undefined, undefined, undefined, undefined, undefined]);
+});
