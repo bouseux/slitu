@@ -21,3 +21,8 @@ QUnit.test('at test', function (assert) {
 	assert.equal(slitu.at(arr, 1), 6);
 	assert.equal(slitu.at(arr, [0, 3]), [4, 7]);
 });
+
+QUnit.test('average test', function (assert) {
+	var arr = [1, 2, 3, 4];
+	assert.equal(slitu.average(arr), 5);
+});
